@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4423E1F9310D53A017C032CD /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4843A82EA068D9BBC5D257BD /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		637D7E461AC23AFC00E53CC4 /* Kiss.caf in Resources */ = {isa = PBXBuildFile; fileRef = 637D7E451AC23AFB00E53CC4 /* Kiss.caf */; };
+		637D7E4A1AC2645200E53CC4 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D7E491AC2645200E53CC4 /* SCLAlertView.swift */; };
+		63840C461ABE2D3A00918BD1 /* PhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63840C451ABE2D3A00918BD1 /* PhoneView.m */; };
+		63840C4A1ABF353200918BD1 /* PairedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63840C491ABF353200918BD1 /* PairedView.swift */; };
+		63A980001AB4BD7F00F4C9B0 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A97FFF1AB4BD7F00F4C9B0 /* App.swift */; };
+		63A980071AB4BD7F00F4C9B0 /* Kissogram.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A980061AB4BD7F00F4C9B0 /* Kissogram.xcassets */; };
+		63A980201AB4BF1000F4C9B0 /* etc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A9801F1AB4BF1000F4C9B0 /* etc.swift */; };
+		63D77AEA1AC492C300368509 /* MotionBlurLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D77AE91AC492C300368509 /* MotionBlurLabel.m */; };
+		63D77AF01AC4937700368509 /* MotionBlurFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D77AEF1AC4937700368509 /* MotionBlurFilter.m */; };
+		63D77AF31AC4946A00368509 /* SwishLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D77AF21AC4946A00368509 /* SwishLabel.swift */; };
+		63DB3B7C1ABE2AD300CE35C6 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3B7B1ABE2AD300CE35C6 /* SetupView.swift */; };
+		63DE0E981AC337E60001C7EC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DE0E971AC337E60001C7EC /* MenuViewController.swift */; };
+		63ECFC681ABF5A3200F68794 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ECFC671ABF5A3200F68794 /* ErrorView.swift */; };
+		63FA1A8F1AB694B2009EC780 /* pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA1A8E1AB694B2009EC780 /* pair.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4843A82EA068D9BBC5D257BD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		637D7E451AC23AFB00E53CC4 /* Kiss.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kiss.caf; path = Resources/Kiss.caf; sourceTree = SOURCE_ROOT; };
+		637D7E491AC2645200E53CC4 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = Sources/SCLAlertView.swift; sourceTree = SOURCE_ROOT; };
+		63840C431ABE2D3A00918BD1 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = bridge.h; path = Sources/bridge.h; sourceTree = SOURCE_ROOT; };
+		63840C441ABE2D3A00918BD1 /* PhoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneView.h; path = Sources/PhoneView.h; sourceTree = SOURCE_ROOT; };
+		63840C451ABE2D3A00918BD1 /* PhoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneView.m; path = Sources/PhoneView.m; sourceTree = SOURCE_ROOT; };
+		63840C491ABF353200918BD1 /* PairedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PairedView.swift; path = Sources/PairedView.swift; sourceTree = SOURCE_ROOT; };
+		63A97FFA1AB4BD7F00F4C9B0 /* Kissogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kissogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		63A97FFE1AB4BD7F00F4C9B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Sources/Info.plist; sourceTree = "<group>"; };
+		63A97FFF1AB4BD7F00F4C9B0 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = App.swift; path = Sources/App.swift; sourceTree = "<group>"; };
+		63A980061AB4BD7F00F4C9B0 /* Kissogram.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Kissogram.xcassets; sourceTree = "<group>"; };
+		63A9801F1AB4BF1000F4C9B0 /* etc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = etc.swift; path = Sources/etc.swift; sourceTree = "<group>"; };
+		63A980211AB5209700F4C9B0 /* Kissogram.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Kissogram.entitlements; sourceTree = "<group>"; };
+		63D77AE81AC492C300368509 /* MotionBlurLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurLabel.h; sourceTree = "<group>"; };
+		63D77AE91AC492C300368509 /* MotionBlurLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurLabel.m; sourceTree = "<group>"; };
+		63D77AEE1AC4937700368509 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
+		63D77AEF1AC4937700368509 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurFilter.m; sourceTree = "<group>"; };
+		63D77AF21AC4946A00368509 /* SwishLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwishLabel.swift; sourceTree = "<group>"; };
+		63DB3B7B1ABE2AD300CE35C6 /* SetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetupView.swift; path = Sources/SetupView.swift; sourceTree = SOURCE_ROOT; };
+		63DE0E971AC337E60001C7EC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		63ECFC671ABF5A3200F68794 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = Sources/ErrorView.swift; sourceTree = SOURCE_ROOT; };
+		63FA1A8E1AB694B2009EC780 /* pair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = pair.swift; path = Sources/pair.swift; sourceTree = "<group>"; };
+		708DE35226BF8EE3CA255875 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F284012817CFBFC42DC54297 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		63A97FF71AB4BD7F00F4C9B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4423E1F9310D53A017C032CD /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A1C053BE1AEEDD0DA4CA8F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4843A82EA068D9BBC5D257BD /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63A97FF11AB4BD7F00F4C9B0 = {
+			isa = PBXGroup;
+			children = (
+				63A97FFF1AB4BD7F00F4C9B0 /* App.swift */,
+				63DB3B7B1ABE2AD300CE35C6 /* SetupView.swift */,
+				63840C491ABF353200918BD1 /* PairedView.swift */,
+				63ECFC671ABF5A3200F68794 /* ErrorView.swift */,
+				63DE0E971AC337E60001C7EC /* MenuViewController.swift */,
+				63FA1A8E1AB694B2009EC780 /* pair.swift */,
+				63A9801F1AB4BF1000F4C9B0 /* etc.swift */,
+				63A980061AB4BD7F00F4C9B0 /* Kissogram.xcassets */,
+				63D77AF11AC4938300368509 /* lib */,
+				63A97FFB1AB4BD7F00F4C9B0 /* … */,
+				E241AB4FD797A8D6029744F3 /* Pods */,
+				1A1C053BE1AEEDD0DA4CA8F9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		63A97FFB1AB4BD7F00F4C9B0 /* … */ = {
+			isa = PBXGroup;
+			children = (
+				637D7E451AC23AFB00E53CC4 /* Kiss.caf */,
+				63A97FFD1AB4BD7F00F4C9B0 /* Supporting Files */,
+				63A97FFA1AB4BD7F00F4C9B0 /* Kissogram.app */,
+			);
+			name = "…";
+			sourceTree = "<group>";
+		};
+		63A97FFD1AB4BD7F00F4C9B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				63840C431ABE2D3A00918BD1 /* bridge.h */,
+				63A980211AB5209700F4C9B0 /* Kissogram.entitlements */,
+				63A97FFE1AB4BD7F00F4C9B0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			path = ILoveYou;
+			sourceTree = "<group>";
+		};
+		63D77AF11AC4938300368509 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				63840C441ABE2D3A00918BD1 /* PhoneView.h */,
+				63840C451ABE2D3A00918BD1 /* PhoneView.m */,
+				63D77AE81AC492C300368509 /* MotionBlurLabel.h */,
+				63D77AE91AC492C300368509 /* MotionBlurLabel.m */,
+				63D77AEE1AC4937700368509 /* MotionBlurFilter.h */,
+				63D77AEF1AC4937700368509 /* MotionBlurFilter.m */,
+				637D7E491AC2645200E53CC4 /* SCLAlertView.swift */,
+				63D77AF21AC4946A00368509 /* SwishLabel.swift */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		E241AB4FD797A8D6029744F3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F284012817CFBFC42DC54297 /* Pods.debug.xcconfig */,
+				708DE35226BF8EE3CA255875 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63A97FF91AB4BD7F00F4C9B0 /* Kissogram */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63A980191AB4BD7F00F4C9B0 /* Build configuration list for PBXNativeTarget "Kissogram" */;
+			buildPhases = (
+				B234045AA5735774E0C1EB0C /* Check Pods Manifest.lock */,
+				63A97FF61AB4BD7F00F4C9B0 /* Sources */,
+				63A97FF71AB4BD7F00F4C9B0 /* Frameworks */,
+				63A97FF81AB4BD7F00F4C9B0 /* Resources */,
+				9C40AAFCBB2D4065CF053CAD /* Embed Pods Frameworks */,
+				499DB02D78DD52E5216211DF /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kissogram;
+			productName = ILoveYou;
+			productReference = 63A97FFA1AB4BD7F00F4C9B0 /* Kissogram.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		63A97FF21AB4BD7F00F4C9B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Max Howell";
+				TargetAttributes = {
+					63A97FF91AB4BD7F00F4C9B0 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = ZU76A67LGU;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 63A97FF51AB4BD7F00F4C9B0 /* Build configuration list for PBXProject "Kissogram" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 63A97FF11AB4BD7F00F4C9B0;
+			productRefGroup = 63A97FFB1AB4BD7F00F4C9B0 /* … */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63A97FF91AB4BD7F00F4C9B0 /* Kissogram */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		63A97FF81AB4BD7F00F4C9B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63A980071AB4BD7F00F4C9B0 /* Kissogram.xcassets in Resources */,
+				637D7E461AC23AFC00E53CC4 /* Kiss.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		499DB02D78DD52E5216211DF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C40AAFCBB2D4065CF053CAD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B234045AA5735774E0C1EB0C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63A97FF61AB4BD7F00F4C9B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63840C461ABE2D3A00918BD1 /* PhoneView.m in Sources */,
+				63A980001AB4BD7F00F4C9B0 /* App.swift in Sources */,
+				63ECFC681ABF5A3200F68794 /* ErrorView.swift in Sources */,
+				63FA1A8F1AB694B2009EC780 /* pair.swift in Sources */,
+				63DE0E981AC337E60001C7EC /* MenuViewController.swift in Sources */,
+				637D7E4A1AC2645200E53CC4 /* SCLAlertView.swift in Sources */,
+				63DB3B7C1ABE2AD300CE35C6 /* SetupView.swift in Sources */,
+				63D77AEA1AC492C300368509 /* MotionBlurLabel.m in Sources */,
+				63D77AF31AC4946A00368509 /* SwishLabel.swift in Sources */,
+				63840C4A1ABF353200918BD1 /* PairedView.swift in Sources */,
+				63D77AF01AC4937700368509 /* MotionBlurFilter.m in Sources */,
+				63A980201AB4BF1000F4C9B0 /* etc.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		63A980171AB4BD7F00F4C9B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		63A980181AB4BD7F00F4C9B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		63A9801A1AB4BD7F00F4C9B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F284012817CFBFC42DC54297 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Kissogram.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Sources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = Kissogram;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Sources/bridge.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		63A9801B1AB4BD7F00F4C9B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 708DE35226BF8EE3CA255875 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Kissogram.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Sources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = Kissogram;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Sources/bridge.h;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		63A97FF51AB4BD7F00F4C9B0 /* Build configuration list for PBXProject "Kissogram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63A980171AB4BD7F00F4C9B0 /* Debug */,
+				63A980181AB4BD7F00F4C9B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63A980191AB4BD7F00F4C9B0 /* Build configuration list for PBXNativeTarget "Kissogram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63A9801A1AB4BD7F00F4C9B0 /* Debug */,
+				63A9801B1AB4BD7F00F4C9B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 63A97FF21AB4BD7F00F4C9B0 /* Project object */;
+}

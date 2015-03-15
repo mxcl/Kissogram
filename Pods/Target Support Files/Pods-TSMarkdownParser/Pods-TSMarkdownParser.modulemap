@@ -1,0 +1,6 @@
+framework module TSMarkdownParser {
+  umbrella header "Pods-TSMarkdownParser-umbrella.h"
+
+  export *
+  module * { export * }
+}
