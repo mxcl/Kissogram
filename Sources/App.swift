@@ -1,13 +1,13 @@
 import AVFoundation.AVAudioPlayer
 import CloudKit
-import StoreKit
 import PromiseKit
+import StoreKit
 import UIKit
 
 private enum State {
     case Setup
     case Paired(CKRecordID, String)
-    case Error(NSError)
+    case Error(ErrorType)
 }
 
 
@@ -25,12 +25,12 @@ private enum State {
                 switch self.state! {
                 case .Setup:
                     let view = SetupView()
-                    let _:() = view.promise.then {
+                    view.promise.then {
                         self.state = .Paired($0)
-                    }.catch {
+                    }.report { error in
                         // this catch is necessary because the unhandled error
                         // handler will not trigger if the promise doesn’t dealloc
-                        self.state = .Error($0)
+                        self.state = .Error(error)
                     }
                     return view
 
@@ -51,9 +51,20 @@ private enum State {
     }
 
     lazy var player: AVAudioPlayer = {
+
+        class Player: AVAudioPlayer, AVAudioPlayerDelegate {
+            @objc func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+                // always be prepared to play
+                prepareToPlay()
+            }
+        }
+
         let path = NSBundle.mainBundle().pathForResource("Kiss", ofType: "caf")!
         let url = NSURL(fileURLWithPath: path)
-        return AVAudioPlayer(contentsOfURL: url, error: nil)
+        let player = try! Player(contentsOfURL: url)
+        player.prepareToPlay()
+        player.delegate = player
+        return player
     }()
 
     weak var alert: SCLAlertView?
@@ -72,42 +83,38 @@ extension App: MenuViewControllerDelegate {
     }
 
     func showKiss(name: String) {
-        if alert == nil {
-            let alert = SCLAlertView()
-            alert.showTitle("\(name) loves you.", completeText: "Yeah, I Know.")
-            self.alert = alert
-            player.play()
-        }
+        guard alert == nil else { return }
+
+        alert = SCLAlertView()
+        alert!.showTitle("\(name) loves you.", completeText: "Yeah, I Know.")
+        player.play()
     }
 
     func sendKiss() {
-        if !player.playing {
-            switch state! {
-            case .Paired(let lover, let name):
-                let swish = (contentView as! PairedView).status
+        guard !player.playing else { return }
+        guard case let .Paired(lover, name) = state! else { return }
 
-                swish.text = "Sending Kiss…"
+        let swish = (contentView as! PairedView).status
 
-                let kiss = CKRecord(recordType: "Kiss")
-                kiss.setObject(CKReference(recordID: lover, action: .DeleteSelf), forKey: "target")
+        swish.text = "Sending Kiss…"
 
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                let _:() = CKContainer.defaultContainer().publicCloudDatabase.save(kiss).then { _ -> Void in
-                    swish.text = "You sent \(name) a kiss!"
-                    swish.clearAfter(5)
-                }.finally {
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                }.catch { error in
-                    self.state = .Error(error)
-                }
+        let kiss = CKRecord(recordType: "Kiss")
+        kiss.setObject(CKReference(recordID: lover, action: .DeleteSelf), forKey: "target")
 
-                NSUserDefaults.standardUserDefaults().isFirstKiss = false
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 
-                player.play()
-            default:
-                break
-            }
+        CKContainer.defaultContainer().publicCloudDatabase.save(kiss).then { _ -> Void in
+            swish.text = "You sent \(name) a kiss!"
+            swish.clearAfter(5)
+        }.ensure {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }.report { error in
+            self.state = .Error(error)
         }
+
+        NSUserDefaults.standardUserDefaults().isFirstKiss = false
+
+        player.play()
     }
 
     func showConfig() {
@@ -115,7 +122,6 @@ extension App: MenuViewControllerDelegate {
             vc.delegate = self
             self.presentViewController(vc, animated: false, completion: nil)
         }
-
     }
 }
 
@@ -139,10 +145,10 @@ extension App {
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
 
         // prevent app from stopping music
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient, error:nil)
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
 
-        IAP.RemoveAds.prepare()
-
+        IAP.RemoveAds.fetchPrice()
+        
         return true
     }
 
@@ -151,14 +157,15 @@ extension App {
     }
 
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        state = .Error(error)
+        state = State.Error(error)
     }
 
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
 
-        let permissionDenied = notificationSettings.types & .Alert == nil
+        let permissionDenied = !notificationSettings.types.contains(.Alert)
+
         if permissionDenied {
-            state = .Error(NSError(luv: "Kissogram requires that push notifications be enabled."))
+            state = State.Error(Kissogram.Error.PushNotificationsDisabled)
             //TODO: application.openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
         }
     }
@@ -175,39 +182,30 @@ extension App {
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
-        if let note = CKNotification(fromRemoteNotificationDictionary: userInfo) {
-            if application.applicationState == .Active && note.notificationType == .Query {
-                switch state! {
-                case .Paired(let record, let name):
-                    showKiss(name)
-                default:
-                    break
-                }
-            }
-        }
+        defer { completionHandler(.NoData) }
 
-        completionHandler(.NoData)
+        guard application.applicationState == .Active else { return }
+        let note = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String: NSObject])
+        guard note.notificationType == .Query else { return }
+        guard case let .Paired(_, name) = state! else { return }
+
+        showKiss(name)
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification payload: [NSObject : AnyObject]) {
-        if application.applicationState == .Active {
-            switch state! {
-            case .Paired(let record, let name):
-                showKiss(name)
-            default:
-                break
-            }
-        }
+        guard application.applicationState == .Active else { return }
+        guard case let .Paired(_, name) = state! else { return }
+
+        showKiss(name)
     }
 
     class func registerForRemoteNotifications() {
-        let types = UIUserNotificationType.Badge | .Alert | .Sound
+        let types = UIUserNotificationType(rawValue: UIUserNotificationType.Badge.rawValue | UIUserNotificationType.Alert.rawValue | UIUserNotificationType.Sound.rawValue)
         let settings = UIUserNotificationSettings(forTypes: types, categories:nil)
         let application = UIApplication.sharedApplication()
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
     }
-
 }
 
 
@@ -237,12 +235,11 @@ extension App {
 
 extension App: SKPaymentTransactionObserver {
 
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         let defaults = NSUserDefaults.standardUserDefaults()
         let app = UIApplication.sharedApplication()
 
-        func handleTransaction(transaction: SKPaymentTransaction) {
-
+        for transaction in transactions {
             func purchased(pid: String) {
                 defaults.setBool(true, forKey: pid)
                 queue.finishTransaction(transaction)
@@ -253,9 +250,10 @@ extension App: SKPaymentTransactionObserver {
             case .Purchased:
                 purchased(transaction.payment.productIdentifier)
             case .Restored:
-                purchased(transaction.originalTransaction.payment.productIdentifier)
+                guard let transaction = transaction.originalTransaction else { return print("No original transaction") }
+                purchased(transaction.payment.productIdentifier)
             case .Failed:
-                paymentQueue(queue, restoreCompletedTransactionsFailedWithError: transaction.error)
+                paymentQueue(queue, restoreCompletedTransactionsFailedWithError: transaction.error!)
                 queue.finishTransaction(transaction)
             case .Purchasing:
                 app.networkActivityIndicatorVisible = true
@@ -268,20 +266,16 @@ extension App: SKPaymentTransactionObserver {
                 app.networkActivityIndicatorVisible = false
             }
         }
-
-        for transaction in transactions {
-            handleTransaction(transaction as! SKPaymentTransaction)
-        }
     }
 
-    func paymentQueue(queue: SKPaymentQueue!, restoreCompletedTransactionsFailedWithError error: NSError!) {
-        if (error.code != SKErrorPaymentCancelled) {
+    func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
+        if error.code != SKErrorPaymentCancelled {
             UIAlertView.show(error)
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
+    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 }

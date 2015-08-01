@@ -1,9 +1,6 @@
-//
-//  SCLAlertView.swift
-//  SCLAlertView Example
-//
 //  Created by Viktor Radchenko on 6/5/14.
 //  Copyright (c) 2014 Viktor Radchenko. All rights reserved.
+//  Modified by Max Howell
 //
 
 import UIKit
@@ -37,7 +34,7 @@ public class SCLAlertView: UIVisualEffectView {
         self.init(effect: UIBlurEffect(style: .Dark))
 
         frame = UIScreen.mainScreen().bounds
-        autoresizingMask = UIViewAutoresizing.FlexibleHeight | .FlexibleWidth
+        autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.FlexibleHeight.rawValue | UIViewAutoresizing.FlexibleWidth.rawValue)
 
         baseView.frame = bounds
         baseView.addSubview(innerView)
@@ -89,7 +86,7 @@ public class SCLAlertView: UIVisualEffectView {
     public func showTitle(title: String, completeText: String) {
         alpha = 0
 
-        let rv = UIApplication.sharedApplication().keyWindow?.subviews.first as! UIView
+        guard let rv = UIApplication.sharedApplication().keyWindow?.subviews.first else { return }
         rv.addSubview(self)
         frame = rv.bounds
         baseView.frame = rv.bounds

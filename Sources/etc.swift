@@ -1,57 +1,13 @@
+enum Error: ErrorType {
+    case PushNotificationsDisabled
+    case UnknownPairingError
+    case MultipeerCommunicationsError
+}
+
+
+////////////////////////////////////////////////////////////// Foundation
 import Foundation
-import UIKit.UIColor
 import CloudKit.CKRecordID
-
-extension CGRect {
-    var center: CGPoint {
-        return CGPoint(x: CGRectGetMidX(self), y: CGRectGetMidY(self))
-    }
-}
-
-extension UIColor {
-    convenience init(hex: Int) {
-        let red = CGFloat((hex & 0xFF0000) >> 16) / 255.0
-        let green = CGFloat((hex & 0xFF00) >> 8) / 255.0
-        let blue = CGFloat(hex & 0xFF) / 255.0
-        self.init(red: red, green: green, blue: blue, alpha: 1.0)
-    }
-
-    class func hotPink(alpha: CGFloat = 1) -> UIColor {
-        return UIColor(hue:0.93, saturation:1, brightness:1, alpha:alpha)
-    }
-
-    class func pink1() -> UIColor {
-        return UIColor(hex: 0xBB377D)
-    }
-
-    class func pink2() -> UIColor {
-        return UIColor(hex: 0xFBD3E9)
-    }
-}
-
-class GradientBackgroundView: UIView {
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-
-        let ctx = UIGraphicsGetCurrentContext()
-
-        let colors = [UIColor.pink1().CGColor, UIColor.pink2().CGColor]
-        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), colors, [0.0, 1.0])
-        let opts = CGGradientDrawingOptions(kCGGradientDrawsAfterEndLocation)
-
-        CGContextDrawLinearGradient(ctx, gradient, CGPoint(), CGPoint(x: 0, y: bounds.size.height), opts)
-    }
-}
-
-extension NSError {
-    convenience init(luv: String) {
-        self.init(domain: "LuvDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: luv])
-    }
-
-    class func canceled() -> NSError {
-        return NSError(domain: "LuvDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Operation Canceled"])
-    }
-}
 
 private let RecordKey = "LoverRecordName"
 private let NameKey = "LoverName"
@@ -61,10 +17,8 @@ extension NSUserDefaults {
     var lover: (CKRecordID, String)? {
         get {
             if let recordName = objectForKey(RecordKey) as? String {
-                if let recordID = CKRecordID(recordName: recordName) {
-                    if let name = objectForKey(NameKey) as? String {
-                        return (recordID, name)
-                    }
+                if let name = objectForKey(NameKey) as? String {
+                    return (CKRecordID(recordName: recordName), name)
                 }
             }
             return nil
@@ -104,8 +58,61 @@ extension NSCoder {
 }
 
 
-extension UIDevice {
+/////////////////////////////////////////////////////////////////// UIKit
+import UIKit
 
+extension UIColor {
+    convenience init(hex: Int) {
+        let red = CGFloat((hex & 0xFF0000) >> 16) / 255.0
+        let green = CGFloat((hex & 0xFF00) >> 8) / 255.0
+        let blue = CGFloat(hex & 0xFF) / 255.0
+        self.init(red: red, green: green, blue: blue, alpha: 1.0)
+    }
+
+    class func hotPink(alpha alpha: CGFloat = 1) -> UIColor {
+        return UIColor(hue:0.93, saturation:1, brightness:1, alpha:alpha)
+    }
+
+    class func pink1() -> UIColor {
+        return UIColor(hex: 0xBB377D)
+    }
+
+    class func pink2() -> UIColor {
+        return UIColor(hex: 0xFBD3E9)
+    }
+}
+
+extension UIActivityViewController {
+    convenience init(messagePrefix: String) {
+        let urlString = "http://appstore.com/kissogram"
+        let messageText = "\(messagePrefix) \(urlString)"
+        let activityItems: [AnyObject] = [messageText]
+
+        // just makes mail + messages repeat the URL twice FFS
+        //        if let url = NSURL(string: urlString) {
+        //            activityItems.append(url)
+        //        }
+
+        self.init(activityItems: activityItems, applicationActivities:nil)
+        setValue("Check out Kissogram!", forKey: "subject")
+        excludedActivityTypes = [UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList]
+    }
+}
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.nextResponder()
+            if let vc = parentResponder as? UIViewController {
+                return vc
+            }
+        }
+        return nil
+    }
+}
+
+extension UIDevice {
     enum Model {
         case iPhone4
         case iPhone5
@@ -127,13 +134,25 @@ extension UIDevice {
     }
 }
 
-
 extension UIAlertView {
-    class func show(error: NSError) {
+    class func show(error: ErrorType) {
         let alert = UIAlertView()
         alert.title = "Error"
-        alert.message = error.localizedDescription ?? "Unknown error."
-        alert.addButtonWithTitle("OK")
+        alert.message = {
+            if let error = error as? Kissogram.Error {
+                switch error {
+                case .PushNotificationsDisabled:
+                    return "Kissogram requires Push Notifications to be enabled."
+                case .UnknownPairingError:
+                    return "Unexpected pairing error."
+                case .MultipeerCommunicationsError:
+                    return "Unexpected multipeer communications error."
+                }
+            } else {
+                return (error as NSError).localizedDescription ?? "Unknown error."
+            }
+            }()
+        alert.addButtonWithTitle("That Sucks!")
         alert.show()
     }
 }
@@ -164,7 +183,7 @@ extension UILabel {
 
 private class Wrapper: UIView {
     private override func layoutSubviews() {
-        let v = subviews[0] as! UIView
+        let v = subviews[0]
         let f = CGRectInset(bounds, 10, 9)
         v.frame = f
         v.sizeToFit()
@@ -179,64 +198,12 @@ func wrap(label: UILabel, margin: CGFloat) -> UIView {
 }
 
 class CogButton: UIButton {
-    required init(coder: NSCoder = NSCoder.empty()) {
+    required init!(coder: NSCoder = NSCoder.empty()) {
         super.init(coder: coder)
         frame = CGRectMake(0, 0, 44, 44)
         setImage(UIImage(named: "Cog"), forState: .Normal)
     }
 }
-
-
-import PromiseKit
-import StoreKit
-
-private var IAPRemoveAdsPrice: String?
-
-class IAP {
-    class func products() -> Promise<SKProductsResponse> {
-        let rq = SKProductsRequest(productIdentifiers: [IAP.RemoveAds.productIdentifier])
-        return rq.promise()
-    }
-
-    class RemoveAds: NSObject {
-        class func prepare() {
-            if !purchased {
-                let name = UIApplicationDidBecomeActiveNotification
-                let p: Promise<NSNotification> = NSNotificationCenter.once(name)
-                p.then { (_: NSNotification) -> Promise<SKProductsResponse> in
-                    return IAP.products()
-                }.then { response -> () in
-                    IAPRemoveAdsPrice = (response.products as! [SKProduct]).first?.priceString
-                }
-            }
-        }
-
-        class var productIdentifier: String {
-            return "RemoveAds"
-        }
-
-        class var purchased: Bool {
-            return NSUserDefaults.standardUserDefaults().boolForKey(productIdentifier)
-        }
-
-        class var price: String? {
-            return IAPRemoveAdsPrice
-        }
-    }
-}
-
-
-import StoreKit.SKProduct
-
-extension SKProduct {
-    private var priceString: String? {
-        let nf = NSNumberFormatter()
-        nf.numberStyle = .CurrencyStyle
-        nf.locale = priceLocale
-        return nf.stringFromNumber(price)
-    }
-}
-
 
 class BorderedButton: UIButton {
     convenience init(text: String, size: CGFloat = 30) {
@@ -257,32 +224,72 @@ class BorderedButton: UIButton {
     }
 }
 
-extension UIActivityViewController {
-    convenience init(messagePrefix: String) {
-        let urlString = "http://appstore.com/kissogram"
-        let messageText = "\(messagePrefix) \(urlString)"
-        var activityItems: [AnyObject] = [messageText]
 
-        // just makes mail + messages repeat the URL twice FFS
-//        if let url = NSURL(string: urlString) {
-//            activityItems.append(url)
-//        }
+//////////////////////////////////////////////////////////// CoreGraphics
+import CoreGraphics
 
-        self.init(activityItems: activityItems, applicationActivities:nil)
-        setValue("Check out Kissogram!", forKey: "subject")
-        excludedActivityTypes = [UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList]
+extension CGRect {
+    var center: CGPoint {
+        return CGPoint(x: CGRectGetMidX(self), y: CGRectGetMidY(self))
     }
 }
 
-extension UIView {
-    var parentViewController: UIViewController? {
-        var parentResponder: UIResponder? = self
-        while parentResponder != nil {
-            parentResponder = parentResponder!.nextResponder()
-            if let vc = parentResponder as? UIViewController {
-                return vc
+class GradientBackgroundView: UIView {
+    override func drawRect(rect: CGRect) {
+        super.drawRect(rect)
+
+        let ctx = UIGraphicsGetCurrentContext()
+
+        let colors = [UIColor.pink1().CGColor, UIColor.pink2().CGColor]
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), colors, [0.0, 1.0])
+        let opts = CGGradientDrawingOptions(rawValue: 1 << 1)
+
+        CGContextDrawLinearGradient(ctx, gradient, CGPoint(), CGPoint(x: 0, y: bounds.size.height), opts)
+    }
+}
+
+
+//////////////////////////////////////////////////////////////// StoreKit
+import PromiseKit
+import StoreKit.SKProduct
+
+private var IAPRemoveAdsPrice: String?
+
+class IAP {
+    class func products() -> Promise<SKProductsResponse> {
+        let pids = Set<String>(arrayLiteral: IAP.RemoveAds.productIdentifier)
+        return SKProductsRequest(productIdentifiers: pids).promise()
+    }
+
+    class RemoveAds {
+        class func fetchPrice() {
+            // I wanted to do this with NSObject.load() but Swift disallows it :(
+            if !purchased {
+                IAP.products().then { response in
+                    IAPRemoveAdsPrice = response.products.first?.priceString
+                }
             }
         }
-        return nil
+
+        class var productIdentifier: String {
+            return "RemoveAds"
+        }
+
+        class var purchased: Bool {
+            return NSUserDefaults.standardUserDefaults().boolForKey(productIdentifier)
+        }
+
+        class var price: String? {
+            return IAPRemoveAdsPrice
+        }
+    }
+}
+
+extension SKProduct {
+    private var priceString: String? {
+        let nf = NSNumberFormatter()
+        nf.numberStyle = .CurrencyStyle
+        nf.locale = priceLocale
+        return nf.stringFromNumber(price)
     }
 }

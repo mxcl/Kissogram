@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4423E1F9310D53A017C032CD /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4843A82EA068D9BBC5D257BD /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2075877B509773DA5BF6264E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0EFCD31D4A3E8E327743BB /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		637D7E461AC23AFC00E53CC4 /* Kiss.caf in Resources */ = {isa = PBXBuildFile; fileRef = 637D7E451AC23AFB00E53CC4 /* Kiss.caf */; };
 		637D7E4A1AC2645200E53CC4 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637D7E491AC2645200E53CC4 /* SCLAlertView.swift */; };
 		63840C461ABE2D3A00918BD1 /* PhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63840C451ABE2D3A00918BD1 /* PhoneView.m */; };
@@ -25,7 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4843A82EA068D9BBC5D257BD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		44B90BD089FAB3D302974619 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4A9A212CC058545A6C725F12 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		637D7E451AC23AFB00E53CC4 /* Kiss.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kiss.caf; path = Resources/Kiss.caf; sourceTree = SOURCE_ROOT; };
 		637D7E491AC2645200E53CC4 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = Sources/SCLAlertView.swift; sourceTree = SOURCE_ROOT; };
 		63840C431ABE2D3A00918BD1 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = bridge.h; path = Sources/bridge.h; sourceTree = SOURCE_ROOT; };
@@ -38,17 +39,16 @@
 		63A980061AB4BD7F00F4C9B0 /* Kissogram.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Kissogram.xcassets; sourceTree = "<group>"; };
 		63A9801F1AB4BF1000F4C9B0 /* etc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = etc.swift; path = Sources/etc.swift; sourceTree = "<group>"; };
 		63A980211AB5209700F4C9B0 /* Kissogram.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Kissogram.entitlements; sourceTree = "<group>"; };
-		63D77AE81AC492C300368509 /* MotionBlurLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurLabel.h; sourceTree = "<group>"; };
-		63D77AE91AC492C300368509 /* MotionBlurLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurLabel.m; sourceTree = "<group>"; };
-		63D77AEE1AC4937700368509 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionBlurFilter.h; sourceTree = "<group>"; };
-		63D77AEF1AC4937700368509 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionBlurFilter.m; sourceTree = "<group>"; };
-		63D77AF21AC4946A00368509 /* SwishLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwishLabel.swift; sourceTree = "<group>"; };
+		63D77AE81AC492C300368509 /* MotionBlurLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionBlurLabel.h; path = Sources/MotionBlurLabel.h; sourceTree = SOURCE_ROOT; };
+		63D77AE91AC492C300368509 /* MotionBlurLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionBlurLabel.m; path = Sources/MotionBlurLabel.m; sourceTree = SOURCE_ROOT; };
+		63D77AEE1AC4937700368509 /* MotionBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionBlurFilter.h; path = Sources/MotionBlurFilter.h; sourceTree = SOURCE_ROOT; };
+		63D77AEF1AC4937700368509 /* MotionBlurFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionBlurFilter.m; path = Sources/MotionBlurFilter.m; sourceTree = SOURCE_ROOT; };
+		63D77AF21AC4946A00368509 /* SwishLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwishLabel.swift; path = Sources/SwishLabel.swift; sourceTree = SOURCE_ROOT; };
 		63DB3B7B1ABE2AD300CE35C6 /* SetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetupView.swift; path = Sources/SetupView.swift; sourceTree = SOURCE_ROOT; };
-		63DE0E971AC337E60001C7EC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		63DE0E971AC337E60001C7EC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = Sources/MenuViewController.swift; sourceTree = SOURCE_ROOT; };
 		63ECFC671ABF5A3200F68794 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = Sources/ErrorView.swift; sourceTree = SOURCE_ROOT; };
 		63FA1A8E1AB694B2009EC780 /* pair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = pair.swift; path = Sources/pair.swift; sourceTree = "<group>"; };
-		708DE35226BF8EE3CA255875 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		F284012817CFBFC42DC54297 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6F0EFCD31D4A3E8E327743BB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,17 +56,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4423E1F9310D53A017C032CD /* Pods.framework in Frameworks */,
+				2075877B509773DA5BF6264E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A1C053BE1AEEDD0DA4CA8F9 /* Frameworks */ = {
+		105533503B88E49DB20595FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4843A82EA068D9BBC5D257BD /* Pods.framework */,
+				6F0EFCD31D4A3E8E327743BB /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,8 +84,8 @@
 				63A980061AB4BD7F00F4C9B0 /* Kissogram.xcassets */,
 				63D77AF11AC4938300368509 /* lib */,
 				63A97FFB1AB4BD7F00F4C9B0 /* … */,
-				E241AB4FD797A8D6029744F3 /* Pods */,
-				1A1C053BE1AEEDD0DA4CA8F9 /* Frameworks */,
+				105533503B88E49DB20595FC /* Frameworks */,
+				7210E146E3DCEDD0A5F4AA2D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,11 +125,11 @@
 			name = lib;
 			sourceTree = "<group>";
 		};
-		E241AB4FD797A8D6029744F3 /* Pods */ = {
+		7210E146E3DCEDD0A5F4AA2D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F284012817CFBFC42DC54297 /* Pods.debug.xcconfig */,
-				708DE35226BF8EE3CA255875 /* Pods.release.xcconfig */,
+				4A9A212CC058545A6C725F12 /* Pods.debug.xcconfig */,
+				44B90BD089FAB3D302974619 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -141,12 +141,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63A980191AB4BD7F00F4C9B0 /* Build configuration list for PBXNativeTarget "Kissogram" */;
 			buildPhases = (
-				B234045AA5735774E0C1EB0C /* Check Pods Manifest.lock */,
+				C1DE234B07B700F1E83C4B28 /* Check Pods Manifest.lock */,
 				63A97FF61AB4BD7F00F4C9B0 /* Sources */,
 				63A97FF71AB4BD7F00F4C9B0 /* Frameworks */,
 				63A97FF81AB4BD7F00F4C9B0 /* Resources */,
-				9C40AAFCBB2D4065CF053CAD /* Embed Pods Frameworks */,
-				499DB02D78DD52E5216211DF /* Copy Pods Resources */,
+				82EF2D32AB113D7C30691D0D /* Embed Pods Frameworks */,
+				E6405C08CECCF8AC0ABB2333 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -164,7 +164,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Max Howell";
 				TargetAttributes = {
 					63A97FF91AB4BD7F00F4C9B0 = {
@@ -209,22 +209,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		499DB02D78DD52E5216211DF /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C40AAFCBB2D4065CF053CAD /* Embed Pods Frameworks */ = {
+		82EF2D32AB113D7C30691D0D /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -239,7 +224,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B234045AA5735774E0C1EB0C /* Check Pods Manifest.lock */ = {
+		C1DE234B07B700F1E83C4B28 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -252,6 +237,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E6405C08CECCF8AC0ABB2333 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -299,6 +299,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -358,7 +359,7 @@
 		};
 		63A9801A1AB4BD7F00F4C9B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F284012817CFBFC42DC54297 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 4A9A212CC058545A6C725F12 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -368,6 +369,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.mxcl.luv;
 				PRODUCT_NAME = Kissogram;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = Sources/bridge.h;
@@ -377,7 +379,7 @@
 		};
 		63A9801B1AB4BD7F00F4C9B0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 708DE35226BF8EE3CA255875 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 44B90BD089FAB3D302974619 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -387,6 +389,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.mxcl.luv;
 				PRODUCT_NAME = Kissogram;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = Sources/bridge.h;

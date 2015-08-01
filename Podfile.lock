@@ -1,35 +1,36 @@
 PODS:
-  - OMGHTTPURLRQ (2.1.3):
-    - OMGHTTPURLRQ/RQ (= 2.1.3)
-  - OMGHTTPURLRQ/FormURLEncode (2.1.3)
-  - OMGHTTPURLRQ/RQ (2.1.3):
-    - OMGHTTPURLRQ/FormURLEncode
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (2.1.3)
-  - PromiseKit/CloudKit (2.1.2):
+  - PromiseKit/CloudKit (3.0.0):
     - PromiseKit/CorePromise
-  - PromiseKit/CorePromise (2.1.2)
-  - PromiseKit/Foundation (2.1.2):
-    - OMGHTTPURLRQ (~> 2.1.3)
+  - PromiseKit/CorePromise (3.0.0)
+  - PromiseKit/StoreKit (3.0.0):
     - PromiseKit/CorePromise
-  - PromiseKit/StoreKit (2.1.2):
+  - PromiseKit/UIKit (3.0.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (2.1.2):
-    - PromiseKit/CorePromise
+  - PulsingHalo (0.0.1)
   - TSMarkdownParser (1.0.17)
   - UIImage+ImageWithColor (1.3)
 
 DEPENDENCIES:
-  - PromiseKit/CloudKit (~> 2.1)
-  - PromiseKit/Foundation (~> 2.1)
-  - PromiseKit/StoreKit (~> 2.1)
-  - PromiseKit/UIKit (~> 2.1)
+  - PromiseKit/CloudKit (from `https://github.com/mxcl/PromiseKit.git`, branch `swift-2.0-beta4`)
+  - PromiseKit/StoreKit (from `https://github.com/mxcl/PromiseKit.git`, branch `swift-2.0-beta4`)
+  - PromiseKit/UIKit (from `https://github.com/mxcl/PromiseKit.git`, branch `swift-2.0-beta4`)
+  - PulsingHalo
   - TSMarkdownParser
   - UIImage+ImageWithColor
 
+EXTERNAL SOURCES:
+  PromiseKit:
+    :branch: swift-2.0-beta4
+    :git: https://github.com/mxcl/PromiseKit.git
+
+CHECKOUT OPTIONS:
+  PromiseKit:
+    :commit: b418875b2400244acb84dfc6f483d8747739a889
+    :git: https://github.com/mxcl/PromiseKit.git
+
 SPEC CHECKSUMS:
-  OMGHTTPURLRQ: c4268dea4295b585d711055dbcd87bfa82badd5f
-  PromiseKit: 5c05e653846d58bb57666cd004b2217aacaa0ff9
+  PromiseKit: acf123b5656d0051c715b946e67e91a08b589b3c
+  PulsingHalo: 1583823bd6c989fff3469bb417bc42f0d268f98e
   TSMarkdownParser: 73006e0687af93a7125d645d7e214724e9476343
   UIImage+ImageWithColor: 158a45817f303804374feeae91046977c09d6c8a
 

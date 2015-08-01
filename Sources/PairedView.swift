@@ -20,7 +20,7 @@ class PairedView: UIView {
         heart.setTitle(lover, forState: .Normal)
 
         if NSUserDefaults.standardUserDefaults().isFirstKiss {
-            after(0.1).then { _ -> () in
+            after(0.1).then {
                 self.status.text = "Tap the heart to send\n\(lover) a kiss!"
             }
         }
@@ -59,7 +59,7 @@ class PairedView: UIView {
         SKPaymentQueue.defaultQueue().removeTransactionObserver(self)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -101,19 +101,21 @@ extension PairedView: ADBannerViewDelegate {
 }
 
 extension PairedView: SKPaymentTransactionObserver {
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         func test(pid: String) {
             if pid == IAP.RemoveAds.productIdentifier {
                 ad?.removeFromSuperview()
             }
         }
 
-        for transaction in transactions as! [SKPaymentTransaction] {
+        for transaction in transactions {
             switch transaction.transactionState {
             case .Purchased:
                 test(transaction.payment.productIdentifier)
             case .Restored:
-                test(transaction.originalTransaction.payment.productIdentifier)
+                if let transaction = transaction.originalTransaction {
+                    test(transaction.payment.productIdentifier)
+                }
             default:
                 break
             }

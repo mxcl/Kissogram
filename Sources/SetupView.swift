@@ -1,6 +1,5 @@
 import CloudKit.CKRecordID
 import PromiseKit
-import TSMarkdownParser
 import UIKit
 
 
@@ -14,6 +13,9 @@ private enum State {
 class SetupView: UIView {
     private var contentView: UIView?
 
+    // sadly must be an optional var because the chain references
+    // self so we cannot assign to this property before calling
+    // super.init
     var promise: Promise<(CKRecordID, String)>!
 
     private var state: State = .Loading {
@@ -35,7 +37,7 @@ class SetupView: UIView {
         }
     }
 
-    required init(coder: NSCoder = NSCoder.empty()) {
+    required init!(coder: NSCoder = NSCoder.empty()) {
         super.init(coder: coder)
 
         swiftSucks()
@@ -46,18 +48,17 @@ class SetupView: UIView {
         }.then { username -> Promise<Void> in
             self.state = .Pairing
             return pair(username)
-        }.then { () -> Promise<(CKRecordID, String)> in
-            if let lover = NSUserDefaults.standardUserDefaults().lover {
-                return Promise(lover)
-            } else {
-                return Promise(NSError(luv: "Unknown Pairing Error"))
+        }.then { _ -> (CKRecordID, String) in
+            guard let lover = NSUserDefaults.standardUserDefaults().lover else {
+                throw Error.UnknownPairingError
             }
+            return lover
         }
     }
 
     private func swiftSucks() {
         // bypass swift not running willSet/didSet from the initializer
-        state = .Loading
+        state = .Pairing
     }
 
     override func layoutSubviews() {
@@ -71,7 +72,7 @@ private class RegistrationView: UIView {
     private let label = UILabel()
     private let textField = UITextField()
 
-    required init(coder: NSCoder = NSCoder.empty()) {
+    required init?(coder: NSCoder = NSCoder.empty()) {
         super.init(coder: coder)
         label.attributedText = welcomeText()
         label.textColor = UIColor.whiteColor()
@@ -82,7 +83,7 @@ private class RegistrationView: UIView {
         textField.autocorrectionType = .No
         textField.font = UIFont(name: "HelveticaNeue-Medium", size: 40)
         textField.textAlignment = .Center
-        textField.returnKeyType  = .Go
+        textField.returnKeyType = .Go
         textField.text = NSUserDefaults.standardUserDefaults().objectForKey("Username") as? String ?? ""
         textField.addTarget(self, action: "onchange", forControlEvents: .EditingChanged)
         textField.addTarget(self, action: "go", forControlEvents: .EditingDidEndOnExit)
@@ -92,18 +93,15 @@ private class RegistrationView: UIView {
 
         textField.becomeFirstResponder()
 
-        switch UIDevice.model() {
-        case .iPhone4:
+        if UIDevice.model() == .iPhone4 {
             transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(0.9, 0.9), 0, -42)
-        default:
-            break
         }
     }
 
     @objc func go() {
-        if !textField.text.isEmpty {
-            fulfill(textField.text)
-        }
+        guard !(textField.text?.isEmpty ?? false) else { return }
+
+        fulfill(textField.text!)
     }
 
     @objc func onchange() {
@@ -120,7 +118,7 @@ private class RegistrationView: UIView {
         textField.frame.origin.y = CGRectGetMaxY(label.frame) + 20
     }
 
-    let (promise, fulfill, reject) = Promise<String>.defer()
+    let (promise, fulfill, _) = Promise<String>.pendingPromise()
 }
 
 
@@ -131,7 +129,9 @@ class PairingView: UIView {
     private let spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     private let button = BorderedButton(text: "Share App Store Link", size: 16)
 
-    let (promise, fulfill, reject) = Promise<(CKRecordID, String)>.defer()
+    private let halo = PulsingHaloLayer()
+    
+    let (promise, fulfill, reject) = Promise<(CKRecordID, String)>.pendingPromise()
 
     required init(coder: NSCoder = NSCoder.empty()) {
         super.init(frame: UIScreen.mainScreen().bounds)
@@ -156,16 +156,18 @@ class PairingView: UIView {
         if UIDevice.model() == .iPhone4 {
             transform = CGAffineTransformMakeTranslation(0, -10)
         }
-
-
     }
 
     func go() {
-        UIView.animateWithDuration(0.8) {
-            let w = self.bounds.size.width / 2
+        UIView.animate(duration: 0.8) {
             self.phone1.transform = CGAffineTransformMakeTranslation(250, 0)
             self.phone2.transform = CGAffineTransformMakeTranslation(-250, 0)
             self.label.transform = CGAffineTransformMakeTranslation(0, 200)
+        }.then { _ in
+            self.phone1.animateHalo()
+            return after(self.phone1.halo.animationDuration / 2)
+        }.then {
+            self.phone2.animateHalo()
         }
     }
 
@@ -188,20 +190,32 @@ class PairingView: UIView {
 }
 
 
+import PulsingHalo
+
 private class _PhoneView: UIView {
     let phone = PhoneView()
+    let halo = PulsingHaloLayer()
 
-    required init(coder: NSCoder = NSCoder.empty()) {
+    required init!(coder: NSCoder = NSCoder.empty()) {
         super.init(coder: coder)
         addSubview(phone)
     }
 
     override func layoutSubviews() {
         phone.center = CGPointZero
+        halo.position = CGPoint(x: 0, y: 25)
+    }
+    
+    func animateHalo() {
+        halo.backgroundColor = UIColor.whiteColor().CGColor
+        halo.radius = 75
+
+        layer.insertSublayer(halo, atIndex: 0)
     }
 }
 
 
+import TSMarkdownParser
 
 private func welcomeText() -> NSAttributedString {
     let lines = [

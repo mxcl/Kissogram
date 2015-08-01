@@ -1,9 +1,9 @@
 use_frameworks!
 
-pod "PromiseKit/Foundation", "~> 2.1"
-pod "PromiseKit/UIKit", "~> 2.1"
-pod "PromiseKit/CloudKit", "~> 2.1"
-pod "PromiseKit/StoreKit", "~> 2.1"
-
 pod "TSMarkdownParser"
 pod "UIImage+ImageWithColor"
+pod "PulsingHalo"
+
+pod "PromiseKit/CloudKit", git: "https://github.com/mxcl/PromiseKit.git", branch: "swift-2.0-beta4"
+pod "PromiseKit/StoreKit", git: "https://github.com/mxcl/PromiseKit.git", branch: "swift-2.0-beta4"
+pod "PromiseKit/UIKit", git: "https://github.com/mxcl/PromiseKit.git", branch: "swift-2.0-beta4"
